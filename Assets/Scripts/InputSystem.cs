@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class InputSystem : MonoBehaviour {
 
@@ -19,6 +21,14 @@ public class InputSystem : MonoBehaviour {
 			return;
 		}
 
+        if (EventSystem.current.currentSelectedGameObject != null &&
+           (EventSystem.current.currentSelectedGameObject.GetComponent<Text>() != null ||
+                  EventSystem.current.currentSelectedGameObject.GetComponent<Button>() != null))
+        {
+            Debug.Log("left-click over a GUI element!");
+            return;
+        }
+
 		if (Input.GetButton ("Fire1")) {
 			if (!bIsBeingPressed) {
 				bIsBeingPressed = true;
@@ -31,6 +41,12 @@ public class InputSystem : MonoBehaviour {
 			}
 		}
 	}
+
+    public void Reset()
+    {
+        bIsGoActive = false;
+        bIsBeingPressed = false;
+    }
 
 	public void ActiveGoButton(bool value) {
 		bIsGoActive = value;

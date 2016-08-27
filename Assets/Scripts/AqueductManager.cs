@@ -5,8 +5,7 @@ using System.Collections.Generic;
 
 public class AqueductManager : MonoBehaviour {
 
-	List<GameObject> listArcs = new List<GameObject> ();
-	public GameObject FirstArc;
+	public List<GameObject> listArcs = new List<GameObject> ();
 	public GameObject prefabArc;
 	public Button buttonGo;
 	public GameObject InputSystem;
@@ -15,9 +14,6 @@ public class AqueductManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		listArcs = new List<GameObject> ();
-		listArcs.Add (FirstArc);
-
 		buttonGo.interactable = false;
 	}
 	
@@ -34,7 +30,7 @@ public class AqueductManager : MonoBehaviour {
 	void ButtonReleased(bool value) {
 		Debug.Log ("Button released");
 		listArcs[CurrentArc].SendMessage("SetStatus", false);
-		listArcs.Add((GameObject)CreateNewArc ());
+		//listArcs.Add((GameObject)CreateNewArc ());
 		CurrentArc++;
 
 		if (CurrentArc > TotalArcs) {
@@ -51,4 +47,13 @@ public class AqueductManager : MonoBehaviour {
 		return Instantiate(prefabArc, newPos, Quaternion.identity);
 	}
 
+    void Reset()
+    {
+        for (int i = 0; i < listArcs.Count; ++i)
+        {
+            listArcs[i].SendMessage("Reset");
+        }
+        CurrentArc = 0;
+        buttonGo.interactable = false;
+    }
 }

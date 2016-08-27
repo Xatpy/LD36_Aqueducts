@@ -6,10 +6,16 @@ public class ArcLogic : MonoBehaviour {
 	public bool bActive = false;
 	public float bVelocity = 0.1f;
 
+    public Vector3 posInit;
+
 	// Use this for initialization
 	void Start () {
 	
 	}
+
+    void Reset() {
+        this.transform.position = posInit;
+    }
 	
 	// Update is called once per frame
 	void Update () {
