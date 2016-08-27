@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class WaterLogic : MonoBehaviour {
 
 	public GameObject GameState;
 	public float forceX = 400.0f;
 	public Vector3 initPos;
+    public Button buttonGo;
 
 	private Rigidbody rb;
 	private bool bActive = false;
@@ -27,15 +29,25 @@ public class WaterLogic : MonoBehaviour {
 		}
 	}
 
+    public void SetActive(bool value)
+    {
+        bActive = value;
+    }
+
 	public void GoWater() {
-		Debug.Log ("go Water");
+		Debug.Log ("Go Water");
 		bActive = true;
 		Vector3 force = new Vector3 (forceX, -100, 0);
 		rb.AddForce (force);
 		rb.isKinematic = false;
+        buttonGo.interactable = false;
 	}
-		
-	public void SetInitPos() {
+
+    public void Reset()
+    {
 		this.transform.position = initPos;
+        bActive = false;
+        rb.isKinematic = true;
+        this.GetComponent<TrailRenderer>().Clear();
 	}
 }
