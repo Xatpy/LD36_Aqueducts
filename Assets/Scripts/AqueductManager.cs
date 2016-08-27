@@ -41,7 +41,6 @@ public class AqueductManager : MonoBehaviour {
 			buttonGo.interactable = true;
 			InputSystem.SendMessage ("ActiveGoButton", true, SendMessageOptions.RequireReceiver);
 		}
-
 	}
 
 	Object CreateNewArc(){
