@@ -4,6 +4,7 @@ using System.Collections;
 public class ArcLogic : MonoBehaviour {
 
 	public bool bActive = false;
+	public float bVelocity = 0.1f;
 
 	// Use this for initialization
 	void Start () {
@@ -14,9 +15,8 @@ public class ArcLogic : MonoBehaviour {
 	void Update () {
 		if (bActive) {
 			Vector3 pos = this.transform.position;
-			pos.y += 0.05f;
+			pos.y += bVelocity;
 			this.transform.position = pos;
-			Debug.Log ("out");
 		}
 	}
 
