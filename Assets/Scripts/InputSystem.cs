@@ -50,8 +50,5 @@ public class InputSystem : MonoBehaviour {
 	public void ActiveGoButton(bool value) {
 		bIsGoActive = value;
 	}
-		
-	public void GoButton() {
-		Debug.Log ("gooo!");
-	}
+
 }

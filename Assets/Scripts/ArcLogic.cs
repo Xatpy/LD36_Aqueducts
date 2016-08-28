@@ -26,9 +26,7 @@ public class ArcLogic : MonoBehaviour {
 	void Update () {
 		if (bActive) {
 			currentTime += Time.deltaTime;
-			Debug.Log (currentTime + "    " + MaxTime + "    " + (currentTime > MaxTime).ToString());
 			if (currentTime > MaxTime) {
-				Debug.Log ("fuera");
 				return;
 			}
 

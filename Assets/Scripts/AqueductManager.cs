@@ -21,7 +21,6 @@ public class AqueductManager : MonoBehaviour {
 	}
 
 	void ButtonPressed(bool value) {
-		Debug.Log ("Button Pressed");
 		if (Level == 1) {
 			goTutorialScript.SendMessage ("ButtonPressed", true);
 		}
@@ -29,7 +28,6 @@ public class AqueductManager : MonoBehaviour {
 	}
 
 	void ButtonReleased(bool value) {
-		Debug.Log ("Button released");
 		listArcs[CurrentArc].SendMessage("SetStatus", false);
 		CurrentArc++;
 
