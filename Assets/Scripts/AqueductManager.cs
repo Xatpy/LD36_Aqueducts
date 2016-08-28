@@ -74,7 +74,7 @@ public class AqueductManager : MonoBehaviour {
 			Debug.Log ("a");
 			goTutorialScript.SendMessage ("Reset", true);
 		}
-		goTxtLevel.text = "Level " + Level.ToString();
+		goTxtLevel.text = "Level " + ToRoman(Level);
 
         for (int i = 0; i < listArcs.Count; ++i)
         {
@@ -83,4 +83,16 @@ public class AqueductManager : MonoBehaviour {
         CurrentArc = 0;
         buttonGo.interactable = false;
     }
+
+	public string ToRoman(int number)
+	{
+		if (number < 1) return string.Empty;            
+		if (number >= 40) return "XL" + ToRoman(number - 40);
+		if (number >= 10) return "X" + ToRoman(number - 10);
+		if (number >= 9) return "IX" + ToRoman(number - 9);
+		if (number >= 5) return "V" + ToRoman(number - 5);
+		if (number >= 4) return "IV" + ToRoman(number - 4);
+		if (number >= 1) return "I" + ToRoman(number - 1);
+		return "";
+	}
 }
