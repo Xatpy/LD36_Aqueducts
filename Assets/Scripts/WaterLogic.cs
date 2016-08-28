@@ -8,7 +8,7 @@ public class WaterLogic : MonoBehaviour {
 	public GameObject goTutorial;
 	public AudioSource audioSource;
 
-	public float forceX = 400.0f;
+	public float forceX = 500.0f;
 	public Vector3 initPos;
     public Button buttonGo;
 

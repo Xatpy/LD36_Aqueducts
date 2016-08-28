@@ -10,6 +10,9 @@ public class ArcLogic : MonoBehaviour {
 	public AudioClip soundRock;
 	private AudioSource audioSource;
 
+	private float currentTime = .0f;
+	private float MaxTime = 1.6f;
+
 	void Start() {
 		audioSource = GetComponent<AudioSource> ();
 	}
@@ -17,10 +20,18 @@ public class ArcLogic : MonoBehaviour {
 	void Reset(int level) {
         this.transform.position = posInit;
 		bVelocity = 0.1f * level;
+		currentTime = .0f;
     }
 	
 	void Update () {
 		if (bActive) {
+			currentTime += Time.deltaTime;
+			Debug.Log (currentTime + "    " + MaxTime + "    " + (currentTime > MaxTime).ToString());
+			if (currentTime > MaxTime) {
+				Debug.Log ("fuera");
+				return;
+			}
+
 			if (!audioSource.isPlaying) {
 				audioSource.PlayOneShot (soundRock);
 			}
