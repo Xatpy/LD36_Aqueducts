@@ -29,7 +29,6 @@ public class WaterLogic : MonoBehaviour {
 			}
 
 			if (rb.IsSleeping () || rb.velocity.x < -0.05f) {
-				//Debug.Log ("Sleeping");
 				GameState.SendMessage ("WaterEnd", true);
 				bActive = false;
 				audioSource.Stop ();
@@ -43,7 +42,6 @@ public class WaterLogic : MonoBehaviour {
     }
 
 	public void GoWater() {
-		Debug.Log ("Go Water");
 		goTutorial.SendMessage ("Hide");
 		bActive = true;
 		Vector3 force = new Vector3 (forceX, -100, 0);
