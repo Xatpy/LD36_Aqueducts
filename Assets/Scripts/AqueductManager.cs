@@ -11,6 +11,11 @@ public class AqueductManager : MonoBehaviour {
 	public GameObject InputSystem;
 	public int CurrentArc = 0;
 	public int TotalArcs = 6;
+	public GameObject goTutorialScript;
+
+	public Text goTxtLevel;
+	public int Level = 1;
+
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +29,9 @@ public class AqueductManager : MonoBehaviour {
 
 	void ButtonPressed(bool value) {
 		Debug.Log ("Button Pressed");
+		if (Level == 1) {
+			goTutorialScript.SendMessage ("ButtonPressed", true);
+		}
 		listArcs[CurrentArc].SendMessage("SetStatus", true);
 	}
 
@@ -35,7 +43,14 @@ public class AqueductManager : MonoBehaviour {
 
 		if (CurrentArc > TotalArcs) {
 			buttonGo.interactable = true;
+			if (Level == 1) {
+				goTutorialScript.SendMessage ("ShowGo");
+				goTutorialScript.SendMessage ("SetActive", false);
+			}
 			InputSystem.SendMessage ("ActiveGoButton", true, SendMessageOptions.RequireReceiver);
+		} else if (Level == 1) 
+		{
+			goTutorialScript.SendMessage ("ButtonReleased", CurrentArc);
 		}
 	}
 
@@ -47,11 +62,23 @@ public class AqueductManager : MonoBehaviour {
 		return Instantiate(prefabArc, newPos, Quaternion.identity);
 	}
 
-    void Reset()
+	//If bValue == true, new level
+	//else, retry level
+	void Reset(bool bType)
     {
+		if (bType) {
+			goTutorialScript.SendMessage ("Hide", true);
+			Level += 1;
+		} else {
+			Level = 1;
+			Debug.Log ("a");
+			goTutorialScript.SendMessage ("Reset", true);
+		}
+		goTxtLevel.text = "Level " + Level.ToString();
+
         for (int i = 0; i < listArcs.Count; ++i)
         {
-            listArcs[i].SendMessage("Reset");
+            listArcs[i].SendMessage("Reset", Level);
         }
         CurrentArc = 0;
         buttonGo.interactable = false;

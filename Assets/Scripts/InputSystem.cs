@@ -25,7 +25,6 @@ public class InputSystem : MonoBehaviour {
            (EventSystem.current.currentSelectedGameObject.GetComponent<Text>() != null ||
                   EventSystem.current.currentSelectedGameObject.GetComponent<Button>() != null))
         {
-            Debug.Log("left-click over a GUI element!");
             return;
         }
 
