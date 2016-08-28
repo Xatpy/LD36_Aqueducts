@@ -12,7 +12,16 @@ public class GameState : MonoBehaviour {
 	public GameObject goWater;
     public GameObject goAqueduct;
 
+	private AudioSource audioSource;
+	public AudioClip clap;
+	public AudioClip gameOver;
+	public AudioClip click;
+
 	private int currentLevel;
+
+	void Start() {
+		audioSource = GetComponent<AudioSource> ();
+	}
 
 	public void WaterEnd(bool value) {
         ShowCanvasRetry();
@@ -31,6 +40,7 @@ public class GameState : MonoBehaviour {
         canvasFailRetry.SetActive(false);
         canvasInGame.SetActive(false);
 		tutorial.SendMessage ("Hide", true);
+		audioSource.PlayOneShot (clap);
     }
 
     public void ShowCanvasRetry()
@@ -38,6 +48,7 @@ public class GameState : MonoBehaviour {
         canvasLevelCompleted.SetActive(false);
         canvasFailRetry.SetActive(true);
         canvasInGame.SetActive(false);
+		audioSource.PlayOneShot (gameOver);
     }
 
     public void LevelCompleted(bool value) 
@@ -48,12 +59,14 @@ public class GameState : MonoBehaviour {
 	public void NewLevel(int level) {
         Reset(true);
         ShowCanvasInGame();
+		audioSource.PlayOneShot (click);
 	}
 
 	public void RetryLevel(){
 		Reset(false);
 		ShowCanvasInGame();
 		tutorial.SendMessage ("ShowPress", true);
+		audioSource.PlayOneShot (click);
 	}
 
 	private void Reset(bool bType)
@@ -62,4 +75,5 @@ public class GameState : MonoBehaviour {
         goWater.SendMessage("Reset", true);
         goInputSystem.SendMessage("Reset", true);
     }
+
 }

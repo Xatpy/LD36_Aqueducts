@@ -16,15 +16,8 @@ public class AqueductManager : MonoBehaviour {
 	public Text goTxtLevel;
 	public int Level = 1;
 
-
-	// Use this for initialization
 	void Start () {
 		buttonGo.interactable = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		//listArcs[0]
 	}
 
 	void ButtonPressed(bool value) {
@@ -38,7 +31,6 @@ public class AqueductManager : MonoBehaviour {
 	void ButtonReleased(bool value) {
 		Debug.Log ("Button released");
 		listArcs[CurrentArc].SendMessage("SetStatus", false);
-		//listArcs.Add((GameObject)CreateNewArc ());
 		CurrentArc++;
 
 		if (CurrentArc > TotalArcs) {
@@ -71,7 +63,6 @@ public class AqueductManager : MonoBehaviour {
 			Level += 1;
 		} else {
 			Level = 1;
-			Debug.Log ("a");
 			goTutorialScript.SendMessage ("Reset", true);
 		}
 		goTxtLevel.text = "Level " + ToRoman(Level);

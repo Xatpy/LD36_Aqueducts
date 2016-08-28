@@ -7,14 +7,23 @@ public class ArcLogic : MonoBehaviour {
 	public float bVelocity = 0.1f;
     public Vector3 posInit;
 
+	public AudioClip soundRock;
+	private AudioSource audioSource;
+
+	void Start() {
+		audioSource = GetComponent<AudioSource> ();
+	}
+
 	void Reset(int level) {
         this.transform.position = posInit;
 		bVelocity = 0.1f * level;
     }
 	
-	// Update is called once per frame
 	void Update () {
 		if (bActive) {
+			if (!audioSource.isPlaying) {
+				audioSource.PlayOneShot (soundRock);
+			}
 			Vector3 pos = this.transform.position;
 			pos.y += bVelocity;
 			this.transform.position = pos;

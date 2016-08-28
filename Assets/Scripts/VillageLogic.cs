@@ -9,7 +9,6 @@ public class VillageLogic : MonoBehaviour {
 	void OnCollisionEnter (Collision col)
 	{
 		if (col.gameObject.name == "Water") {
-			Debug.Log ("end");
 			GameState.SendMessage ("LevelCompleted", true);
             goWater.SendMessage("SetActive", false);
 		}
