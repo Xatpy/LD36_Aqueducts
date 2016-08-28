@@ -6,11 +6,13 @@ public class GameState : MonoBehaviour {
 	public GameObject canvasLevelCompleted;
     public GameObject canvasFailRetry;
 	public GameObject canvasInGame;
+	public GameObject tutorial;
 
     public GameObject goInputSystem;
 	public GameObject goWater;
     public GameObject goAqueduct;
 
+	private int currentLevel;
 
 	public void WaterEnd(bool value) {
         ShowCanvasRetry();
@@ -28,6 +30,7 @@ public class GameState : MonoBehaviour {
         canvasLevelCompleted.SetActive(true);
         canvasFailRetry.SetActive(false);
         canvasInGame.SetActive(false);
+		tutorial.SendMessage ("Hide", true);
     }
 
     public void ShowCanvasRetry()
@@ -43,15 +46,20 @@ public class GameState : MonoBehaviour {
 	}
 
 	public void NewLevel(int level) {
-		Debug.Log ("New level");
-        Reset();
+        Reset(true);
         ShowCanvasInGame();
 	}
 
-    private void Reset()
+	public void RetryLevel(){
+		Reset(false);
+		ShowCanvasInGame();
+		tutorial.SendMessage ("ShowPress", true);
+	}
+
+	private void Reset(bool bType)
     {
+		goAqueduct.SendMessage("Reset", bType);
         goWater.SendMessage("Reset", true);
-        goAqueduct.SendMessage("Reset", true);
         goInputSystem.SendMessage("Reset", true);
     }
 }
