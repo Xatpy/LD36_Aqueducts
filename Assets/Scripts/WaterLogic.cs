@@ -6,6 +6,7 @@ public class WaterLogic : MonoBehaviour {
 
 	public GameObject GameState;
 	public GameObject goTutorial;
+	public AudioSource audioSource;
 
 	public float forceX = 400.0f;
 	public Vector3 initPos;
@@ -16,17 +17,22 @@ public class WaterLogic : MonoBehaviour {
 
 	void Start() {
 		rb = this.GetComponent<Rigidbody>();
-		//initPos = new Vector3 (-7.7f, 4.3f, 10f);
+		audioSource = this.GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (bActive) {
-			Debug.Log (rb.velocity.x);
+			//Debug.Log (rb.velocity.x);
+			if (!audioSource.isPlaying) {
+				audioSource.Play ();
+			}
+
 			if (rb.IsSleeping () || rb.velocity.x < -0.05f) {
-				Debug.Log ("Sleeping");
+				//Debug.Log ("Sleeping");
 				GameState.SendMessage ("WaterEnd", true);
 				bActive = false;
+				audioSource.Stop ();
 			}
 		}
 	}
